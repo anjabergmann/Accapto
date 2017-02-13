@@ -104,10 +104,16 @@ public class Templating {
 		// Add Functions to Activity
 		if(!screen.getContent().isEmpty()) {
 			for(Object o: screen.getContent()) {
-				if(o instanceof JAXBElement<?> && ((JAXBElement) o).getName().toString().equals("{org.accapto}action")) {
-					ActionType actionType = (ActionType) ((JAXBElement<?>) o).getValue();
-					logger.log("     Found function: " + actionType.getFunction());
-					functions.add(actionType.getFunction());
+				if (o instanceof JAXBElement<?>){
+					if (((JAXBElement) o).getName().toString().equals("{org.accapto}action")){
+						ActionType actionType = (ActionType) ((JAXBElement<?>) o).getValue();
+						logger.log("     Creating function: " + actionType.getFunction() + " ...");
+						functions.add(actionType.getFunction());
+					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}output")){
+						logger.log("     Creating output field ...");
+					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}input")){
+						logger.log("     Creating input field ...");
+					}
 				}
 			}
 		}

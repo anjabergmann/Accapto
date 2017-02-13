@@ -49,6 +49,7 @@ public class AppScaffolder {
 			templating.startTemplating();
 		}
 
+		logger.log("--------------------------------------------------");
 		logger.log("INFO App scaffold created.");	
 	}
 	
