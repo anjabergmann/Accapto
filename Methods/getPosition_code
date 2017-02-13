@@ -1,0 +1,4 @@
+	public void showPosition(View view) {
+		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		showPosition.setText(String.format("%s : %s", location.getLatitude(), location.getLongitude()));
+	}

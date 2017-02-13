@@ -1,0 +1,2 @@
+		showPosition = (TextView) findViewById(R.id.textView);
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" targetNamespace="org.accapto"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="org.accapto">
+
+	<xs:element name="app" type="appType" />
+
+
+	<xs:complexType name="appType">
+		<xs:sequence minOccurs="1">
+			<xs:element name="profile" type="profileType" 	maxOccurs="5" minOccurs="1" />
+			<xs:element name="screen" type="screenType" 	maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="appname" type="xs:string" />
+		<xs:attribute name="package" type="xs:string" use="required"/>
+	</xs:complexType>
+
+
+	<xs:complexType name="screenType" mixed="true">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">	
+			<xs:element name="action" 		type="actionType" 		minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="transition" 	type="transitionType" 	minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="input" 		type="inputType" 		minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="output" 		type="outputType" 		minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="subscreen" 	type="screenType" 		minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" use="optional" />
+	</xs:complexType>
+
+
+
+	<xs:complexType name="inputType">
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" use="optional" />
+	</xs:complexType>
+
+
+	<xs:complexType name="outputType">
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="actionType">
+		<xs:attribute name="function" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="transitionType">
+		<xs:attribute name="target" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="description" type="xs:string" use="optional"></xs:attribute>
+	</xs:complexType>
+
+	<xs:simpleType name="profileType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="no restrictions" />
+			<xs:enumeration value="high contrast" />
+			<xs:enumeration value="blind" />
+			<xs:enumeration value="easy read" />
+			<xs:enumeration value="easy touch" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="baseTyp">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="description" type="xs:string" />
+	</xs:complexType>
+</xs:schema>
