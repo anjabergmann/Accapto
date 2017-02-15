@@ -50,7 +50,7 @@ public class AppScaffolder {
 		}
 
 		logger.log("--------------------------------------------------");
-		logger.log("INFO App scaffold created.");	
+		logger.log("INFO App scaffold created at " + appPath + ".");	
 	}
 	
 	

@@ -90,7 +90,7 @@ public class Templating {
 			createFileOutputStream(screen, ACTIVITY);
 			processTemplating("activity.ftl", activity.getVars(), output);
 			createFileOutputStream(screen, LAYOUT);
-			processTemplating("basicLayout.ftl", layout.getVars(), output);
+			processTemplating("layout_base.ftl", layout.getVars(), output);
 		}
 	}
 	

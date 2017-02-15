@@ -13,7 +13,7 @@ import org.accapto.model.ScreenType;
  */
 public class Layout extends FileModel {
 	
-	private String additionalLayout;
+	private String layout;
 	
 	public Layout(AppType app, ScreenType screen, List<String> functions,Logger logger, MethodGenerator methodGenerator){
 		super(app, screen, functions, logger, methodGenerator);
@@ -22,12 +22,12 @@ public class Layout extends FileModel {
 	
 	@Override
 	public void generateValues(){
-		additionalLayout = getAdditionalLayout();
+		layout = getAdditionalLayout();
 	}
 
 	@Override
 	public void fillVars(){
-		vars.put("additionalLayout", additionalLayout);
+		vars.put("layout", layout);
 	}
 	
 	private String getAdditionalLayout() {
