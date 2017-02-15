@@ -1,1 +1,0 @@
-This directory contains the layout files for the app screens. 

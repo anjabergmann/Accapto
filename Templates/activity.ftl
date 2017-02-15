@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 ${imports}
 
-public class ${activity} extends AppCompatActivity {
+public class ${activity} extends ProfileBaseActivity {
 
 ${variables}
 

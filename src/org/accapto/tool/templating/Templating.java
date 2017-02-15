@@ -105,14 +105,17 @@ public class Templating {
 		if(!screen.getContent().isEmpty()) {
 			for(Object o: screen.getContent()) {
 				if (o instanceof JAXBElement<?>){
-					if (((JAXBElement) o).getName().toString().equals("{org.accapto}action")){
-						ActionType actionType = (ActionType) ((JAXBElement<?>) o).getValue();
-						logger.log("     Creating function: " + actionType.getFunction() + " ...");
-						functions.add(actionType.getFunction());
+						JAXBElement element = (JAXBElement) o;
+					if (element.getName().toString().equals("{org.accapto}action")){
+						String function = ((ActionType) element.getValue()).getFunction();
+						logger.log("     Adding function: " + function);
+						functions.add(function);
 					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}output")){
-						logger.log("     Creating output field ...");
+						String name = ((OutputType) element.getValue()).getName();
+						logger.log("     Creating output field \"" + name + "\" ...");
 					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}input")){
-						logger.log("     Creating input field ...");
+						String name = ((InputType) element.getValue()).getName();
+						logger.log("     Creating input field \"" + name + "\" ...");
 					}
 				}
 			}
