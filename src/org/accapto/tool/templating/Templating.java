@@ -38,9 +38,9 @@ public class Templating {
 	private Path activitydir;
 	private Path manifestdir;
 	private MethodGenerator methodGenerator;
-	private Activity activity;
-	private Layout layout;
-	private Manifest manifest;
+	private ActivityHashmapper activity;
+	private LayoutHashmapper layout;
+	private ManifestHashmapper manifest;
 
 	private final String ACTIVITY = "activity";
 	private final String LAYOUT = "layout";
@@ -75,25 +75,26 @@ public class Templating {
 	 */
 	public void startTemplating(){
 
-		manifest = new Manifest(app, functions, logger, methodGenerator);
+		manifest = new ManifestHashmapper(app, functions, logger, methodGenerator);
 		createFileOutputStream(null, MANIFEST);
 		processTemplating("manifest.ftl", manifest.getVars(), output);
-		
+
 		for(ScreenType screen: app.getScreen()) {
 			logger.log("--------------------------------------------------");
 			logger.log("INFO Creating Files for screen: " + screen.getName() + " ...");
-			
+
+			//Vllt umbenennen in readInput, readLayout, readData etc. 
 			readFunctions(screen);
-			activity = new Activity(app, screen, functions, logger, methodGenerator);
-			layout = new Layout(app, screen, functions, logger, methodGenerator);
-			
+			activity = new ActivityHashmapper(app, screen, functions, logger, methodGenerator);
+			layout = new LayoutHashmapper(app, screen, functions, logger, methodGenerator);
+
 			createFileOutputStream(screen, ACTIVITY);
 			processTemplating("activity.ftl", activity.getVars(), output);
 			createFileOutputStream(screen, LAYOUT);
 			processTemplating("layout_base.ftl", layout.getVars(), output);
 		}
 	}
-	
+
 	/**
 	 * Save all functions of a screen into an ArrayList. 
 	 * @param screen
@@ -101,11 +102,22 @@ public class Templating {
 	@SuppressWarnings("rawtypes")
 	private void readFunctions(ScreenType screen){
 		functions = new ArrayList<>();
-		// Add Functions to Activity
+		//input = new ArrayList<>();
+		//output = new ArrayList<>();
+		//action = new ArrayList<>();
+
 		if(!screen.getContent().isEmpty()) {
 			for(Object o: screen.getContent()) {
 				if (o instanceof JAXBElement<?>){
-						JAXBElement element = (JAXBElement) o;
+
+					
+					JAXBElement element = (JAXBElement) o;
+					
+					//DEBUGGING DELETE LATER
+					Hashmapper hashmapper = new IOHashmapper(element, logger);
+					
+					
+					String type = element.getName().toString();
 					if (element.getName().toString().equals("{org.accapto}action")){
 						String function = ((ActionType) element.getValue()).getFunction();
 						logger.log("     Adding function: " + function);
@@ -121,7 +133,7 @@ public class Templating {
 			}
 		}
 	}
-	
+
 
 	/**
 	 * Starts freemarker templating engine for specified template & templating model.
@@ -153,7 +165,7 @@ public class Templating {
 	private void createFileOutputStream(ScreenType screen, String type) {
 
 		File file = null;
-		
+
 		switch(type){
 		case ACTIVITY:
 			file = new File(activitydir + File.separator 

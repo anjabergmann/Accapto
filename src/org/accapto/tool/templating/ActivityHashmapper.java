@@ -11,7 +11,7 @@ import org.accapto.model.ScreenType;
  * @author Anja
  *
  */
-public class Activity extends FileModel {
+public class ActivityHashmapper extends Hashmapper {
 	
 	private String packageString;
 	private String activity;
@@ -21,7 +21,7 @@ public class Activity extends FileModel {
 	private String onCreate;
 	private String methods;
 	
-	public Activity(AppType app, ScreenType screen, List<String> functions, Logger logger, MethodGenerator methodGenerator){
+	public ActivityHashmapper(AppType app, ScreenType screen, List<String> functions, Logger logger, MethodGenerator methodGenerator){
 		super(app, screen, functions, logger, methodGenerator);
 	}
 

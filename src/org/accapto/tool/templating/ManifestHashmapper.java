@@ -11,14 +11,14 @@ import org.accapto.helper.Logger;
 import org.accapto.model.AppType;
 import org.accapto.model.ScreenType;
 
-public class Manifest extends FileModel{
+public class ManifestHashmapper extends Hashmapper{
 
 	private String packageString;
 	private String activities;
 	private String intent;
 	private String permissions;
 	
-	public Manifest(AppType app, List<String> functions,Logger logger, MethodGenerator methodGenerator) {
+	public ManifestHashmapper(AppType app, List<String> functions,Logger logger, MethodGenerator methodGenerator) {
 		super(app, app.getScreen().get(0), functions, logger, methodGenerator);
 	}
 

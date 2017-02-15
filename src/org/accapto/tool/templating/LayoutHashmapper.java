@@ -11,11 +11,11 @@ import org.accapto.model.ScreenType;
  * @author Anja
  *
  */
-public class Layout extends FileModel {
+public class LayoutHashmapper extends Hashmapper {
 	
 	private String layout;
 	
-	public Layout(AppType app, ScreenType screen, List<String> functions,Logger logger, MethodGenerator methodGenerator){
+	public LayoutHashmapper(AppType app, ScreenType screen, List<String> functions,Logger logger, MethodGenerator methodGenerator){
 		super(app, screen, functions, logger, methodGenerator);
 	}
 

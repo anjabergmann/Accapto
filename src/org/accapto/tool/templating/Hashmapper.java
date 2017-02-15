@@ -16,7 +16,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
-public abstract class FileModel {
+public abstract class Hashmapper {
 
 	protected Map<String, Object> vars;
 	protected ScreenType screen;
@@ -26,7 +26,21 @@ public abstract class FileModel {
 	protected MethodGenerator methodGenerator;
 	protected List<String> functions;
 	
-	public FileModel(AppType app, ScreenType screen, List<String> functions, Logger logger, MethodGenerator methodGenerator){
+	public Hashmapper(Logger logger){
+		this.logger = logger;
+		this.vars = new HashMap<>();
+		
+		cfg = new Configuration(Configuration.VERSION_2_3_23);
+		try {
+			cfg.setDirectoryForTemplateLoading(new File("templates"));
+			cfg.setDefaultEncoding("UTF-8");
+			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Hashmapper(AppType app, ScreenType screen, List<String> functions, Logger logger, MethodGenerator methodGenerator){
 		this.screen = screen;
 		this.app = app;
 		this.logger = logger;
