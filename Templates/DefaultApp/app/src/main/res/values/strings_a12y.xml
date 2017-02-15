@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="title_activity_poi_list_selection">PoiListSelectionActivity</string>
+    <string name="title_activity_trias">TriasActivity</string>
+    <string name="title_activity_theme_selector">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_test_style">TestStyleActivity</string>
+    <string name="title_activity_whereamimain">WhereAmIMain</string>
+
+    <string name="change_theme">Change Theme/profile from Theme Factory</string>
+    <string name="profile_normal">Normal</string>
+    <string name="profile_barrierefrei">Accessible</string>
+    <string name="profile_blind">Blind</string>
+    <string name="profile_defekt">Defect</string>
+    <string name="but_save">Save and exit</string>
+    <string name="but_TalkBack">TalkBack</string>
+    <string name="start_TalkBack">Go to the settings to start TalkBack?</string>
+    <string name="stop_TalkBack">Go to the settings to stop TalkBack?</string>
+    <string name="answer_ja">Yes</string>
+    <string name="answer_nein">No</string>
+
+
+
+
+    <string name="enter_target_activity_tts">enter your routing target or choose a point of interest</string>
+    <string name="TTS_Text">overview of the settings. you can choose between different designs or activate talkback or texttospeech. Select a routing profile.</string>
+    <string name="routing_live_routing_activity">Live Routing with a description of the way to the next rounting point and a map overview</string>
+    <string name="routing_route">Overview of the recommended route, new target and start routing</string>
+    <string name="rounting_start">Startpage go to routing or to the settings</string>
+    <string name="route_selector">Choose a profile for routing</string>
+    <string name="route_end">You reached your destination! Enter a new target or go back to the start</string>
+
+    <string name="but_TextToSpeech">TextToSpeech</string>
+    <string name="startTextToSpeech">Start TextToSpeech?</string>
+    <string name="stopTextToSpeech">Stop TextToSpeech?</string>
+
+    <string name="failTextToSpeech">Sorry! Text To Speech failed</string>
+
+    <string name="titleTarget">Enter target</string>
+    <string name="titleRouting">Overview of suggested Route</string>
+    <string name="titleLiveRouting">Routing Details</string>
+    <string name="titleStart">Start</string>
+
+    <string name="butProfilChanger">Change Routing Profil</string>
+    <string name="title_activity_routing_selector">Select Profil</string>
+    <string name="select_Profile">Choose a suitable routing profile</string>
+    <string name="routing_Fuß">Pedestrian</string>
+    <string name="routing_Blind">Blind</string>
+    <string name="routing_Roll">Wheelchair</string>
+    <string name="butBackRouting">Back to Start</string>
+    <string name="butSaveRoute">Save</string>
+
+
+</resources>

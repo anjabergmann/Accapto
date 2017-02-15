@@ -1,0 +1,132 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:id="@+id/testT">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="right" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_theme" />
+
+
+
+      <RadioGroup
+        android:id="@+id/radioGroupProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="28dp">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_normal"
+            android:layout_marginTop="7dp"/>
+
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_blind"
+            android:layout_marginTop="7dp"/>
+
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_defekt"
+            android:layout_marginTop="7dp"/>
+
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="backSave"
+        android:text="@string/but_save"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGroupProfile"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"/>
+
+
+  <!--         <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/but_TalkBack"
+            android:id="@+id/button3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="checkTalkBack"
+            android:layout_alignParentStart="true"
+               android:layout_marginTop="25dp"/>-->
+          <CheckBox
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/but_TalkBack"
+               android:id="@+id/cbxTalkBack"
+               android:layout_gravity="center_horizontal"
+              android:layout_marginTop="25dp"
+                />
+
+           <CheckBox
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/but_TextToSpeech"
+               android:id="@+id/cbxTextToSpeech"
+               android:layout_gravity="center_horizontal"
+               android:layout_marginTop="10dp"/>
+
+  <!--      <Button
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:text="@string/but_TextToSpeech"
+            android:id="@+id/butTextToSpeech"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="changeTextToSpeech"
+            android:layout_alignParentStart="true" />  -->
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+
+
+    <!--
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kill_n_Restart" 
+        android:onClick="reStarter"/>
+    -->
+
+</RelativeLayout>
