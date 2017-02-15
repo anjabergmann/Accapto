@@ -1,1 +1,0 @@
-This directory contains the java classes with the app code.

@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+
+    <!-- a12y colors-->
+    <color name="global_white_color">#FFFFFF</color>
+    <color name="global_black_color">#000000</color>
+    <color name="global_blue_color">#0000FF</color>
+    <color name="global_red_color">#FF0000</color>
+    <color name="global_frame_black_color">#000000</color>
+    <color name="global_frame_white_color">#FFFFFFFF</color>
+    <color name="standard_background_color">#373A37</color>
+    <color name="vy_normal_layout_bg_color">#000000</color>
+    <color name="vm_defect_layout_bg_color">#000000</color>
+    <color name="te_blind_layout_bg_color">#d6d4d4</color>
+    <color name="vy_normal_title_color">#ffff00</color>
+    <color name="vm_defect_title_color">#123456</color>
+    <color name="te_blind_title_color">#00ffff</color>
+    <color name="vy_normal_vehicleitem_text_color">#000000</color>
+    <color name="vy_normal_menuitem_text_color">#FFFFFF</color>
+    <color name="vm_defect_text_color">#FFFFFF</color>
+    <color name="te_blind_text_color_first">#FFFFFF</color>
+    <color name="te_blind_text_color_second">#000000</color>
+    <color name="advertisment_text_bg_color">#FF9933</color>
+    <color name="titlebar_Background">#DEDEDE</color>
+    <color name="background_gelb">#FFD222</color>
+
+    <color name="blind_bg_color">#606060</color>
+    <color name="normal_but_color">#C0C0C0</color>
+
 </resources>
