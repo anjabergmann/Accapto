@@ -83,7 +83,6 @@ public class Templating {
 			logger.log("--------------------------------------------------");
 			logger.log("INFO Creating Files for screen: " + screen.getName() + " ...");
 
-			//Vllt umbenennen in readInput, readLayout, readData etc. 
 			readFunctions(screen);
 			activity = new ActivityHashmapper(app, screen, functions, logger, methodGenerator);
 			layout = new LayoutHashmapper(app, screen, functions, logger, methodGenerator);
@@ -97,14 +96,12 @@ public class Templating {
 
 	/**
 	 * Save all functions of a screen into an ArrayList. 
+	 * SOLLTE JETZT UNNÖTIG SEIN - LÖSCHEN WENN VERIFIZIERT
 	 * @param screen
 	 */
 	@SuppressWarnings("rawtypes")
 	private void readFunctions(ScreenType screen){
 		functions = new ArrayList<>();
-		//input = new ArrayList<>();
-		//output = new ArrayList<>();
-		//action = new ArrayList<>();
 
 		if(!screen.getContent().isEmpty()) {
 			for(Object o: screen.getContent()) {
