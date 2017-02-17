@@ -4,11 +4,11 @@
 	xsi:schemaLocation="org.accapto accapto_model.xsd ">
 	<p:profile>no restrictions</p:profile>
 	
-	<p:screen name="Main">
+	<p:screen1 name="Main">
 			<p:output description="zeige meine position" name="Meine Position" type="text" />
 			<p:action function="getPosition" name="Position bestimmen" description=""/>
 			<p:output name="position" description="" />
-	</p:screen>
+	</p:screen1>
 	
 	<p:screen name="Juli">
 		<p:output description="" name="Hallo Julian" type="text" />
