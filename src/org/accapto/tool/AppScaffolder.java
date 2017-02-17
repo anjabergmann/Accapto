@@ -50,7 +50,9 @@ public class AppScaffolder {
 		}
 
 		logger.log("--------------------------------------------------");
-		logger.log("INFO App scaffold created at " + appPath + ".");	
+		logger.onlyFile("INFO App scaffold created at " + appPath + ".");
+		//Also write it to sys.out if verbose is not set
+		System.out.println("INFO App scaffold created at " + appPath + ".");
 	}
 	
 	
