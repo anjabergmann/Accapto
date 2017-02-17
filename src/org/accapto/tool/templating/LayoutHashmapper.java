@@ -12,8 +12,8 @@ import org.accapto.model.ScreenType;
  */
 public class LayoutHashmapper extends Hashmapper {
 
-	private String layout;
-	private ScreenType screen;
+	private String layout; // Value that is needed for the template
+	private ScreenType screen; // Model of current screen
 
 	public LayoutHashmapper(ScreenType screen, Logger logger){
 		super(logger);
@@ -41,7 +41,7 @@ public class LayoutHashmapper extends Hashmapper {
 			//Loop through screen objects
 			for(Object o: screen.getContent()) {
 				if (o instanceof JAXBElement<?>){
-					//Generate layout for <input>, <output>, and <action> objects
+					//Generate layout for <input>, <output>, <action>, and <transition> objects
 					@SuppressWarnings("rawtypes")
 					JAXBElement element = (JAXBElement) o;
 					IOHashmapper iohashmapper = new IOHashmapper(element, logger);

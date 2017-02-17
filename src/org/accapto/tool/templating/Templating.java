@@ -26,16 +26,16 @@ import org.accapto.model.*;
  */
 public class Templating {
 
-	private Configuration cfg; // Freemarker configuration
-	private AppType app;
-	private PrintWriter output;
-	private Logger logger;
-	private Path appdir;
-	private Path activitydir;
-	private Path manifestdir;
-	private ActivityHashmapper activity;
-	private LayoutHashmapper layout;
-	private ManifestHashmapper manifest;
+	private Configuration cfg;	// Freemarker configuration
+	private AppType app;		// App model
+	private PrintWriter output;	// Writer to write strings to files
+	private Logger logger;		// Logger object to write log messages to sys.out and to log file
+	private Path appdir;		// Directory where the app scaffold is located
+	private Path activitydir;	// Directory inside the app scaffold folder where the activity files will be located
+	private Path manifestdir;	// Directory inside the app scaffold where the manifest file will be located
+	private ActivityHashmapper activity;	// Hashmapper object for creating activity files
+	private LayoutHashmapper layout;		// Hashmapper object for creating layout files
+	private ManifestHashmapper manifest;	// Hashmapper object for creating manifest files
 
 	private final String ACTIVITY = "activity";
 	private final String LAYOUT = "layout";
@@ -49,7 +49,7 @@ public class Templating {
 		this.activitydir = FileSystems.getDefault().getPath(activityPath);
 		this.manifestdir = FileSystems.getDefault().getPath(appPath, "app" + File.separator + "src" + File.separator + "main");
 
-		// Configuration of the template engine
+		// Configuration of the Freemarker template engine
 		cfg = new Configuration(Configuration.VERSION_2_3_23);
 		try {
 			cfg.setDirectoryForTemplateLoading(new File("templates"));
@@ -58,36 +58,35 @@ public class Templating {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 
 	/**
-	 * Generates AndroidManifest.xml, activity and layout files.
-	 * 
+	 * Generates AndroidManifest.xml, activity files, and layout files.
 	 */
 	public void startTemplating(){
 
-		//Creates AndroidManifest.xml
+		//Create AndroidManifest.xml
 		manifest = new ManifestHashmapper(app, logger);
 		createFileOutputStream(null, MANIFEST);
 		processTemplating("manifest.ftl", manifest.getVars(), output);
 
-		//Loops through all screens
+		//Loop through all screens
 		for(ScreenType screen: app.getScreen()) {
 			logger.log("--------------------------------------------------");
 			logger.log("INFO Creating Files for screen: " + screen.getName() + " ...");
 
-			activity = new ActivityHashmapper(app.getPackage(), screen, logger);
-			layout = new LayoutHashmapper(screen, logger);
-
+			// Create an activity file for the current screen
+			activity = new ActivityHashmapper(app.getPackage(), screen, logger); 
 			createFileOutputStream(screen, ACTIVITY);
 			processTemplating("activity.ftl", activity.getVars(), output);
+			
+			// Create a layout file for the current screen
+			layout = new LayoutHashmapper(screen, logger); 
 			createFileOutputStream(screen, LAYOUT);
 			processTemplating("layout_base.ftl", layout.getVars(), output);
 		}
 	}
-
 
 
 

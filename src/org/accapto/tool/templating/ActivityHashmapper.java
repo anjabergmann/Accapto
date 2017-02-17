@@ -13,13 +13,15 @@ import org.accapto.model.TransitionType;
  */
 public class ActivityHashmapper extends Hashmapper {
 
+	// Values that are needed for the template
 	private String packageString;
 	private String activity;
 	private String imports;
 	private String variables;
 	private String layout;
 	private String methods;
-	private ScreenType screen;
+
+	private ScreenType screen; // Model of the current screen
 
 
 
@@ -60,17 +62,12 @@ public class ActivityHashmapper extends Hashmapper {
 		return screen.getName().substring(0, 1).toUpperCase() + screen.getName().substring(1) + "Activity";
 	}
 
+	//To be implemented if needed
 	private String getImports(){
-		String temp = "";
-		//Not working for some reason ...
-		if (screen.getTransition() != null){
-			temp = "import android.view.View;\n"
-					+ "import android.content.Intent;"; 
-		}
-		return temp;
+		return "";
 	}
-	
-	
+
+
 	private void addImports(){
 		imports = "import android.view.View;\n"
 				+ "import android.content.Intent;"; 
@@ -92,19 +89,20 @@ public class ActivityHashmapper extends Hashmapper {
 		if(!screen.getContent().isEmpty()) {
 			//Loop through screen objects
 			for(Object o: screen.getContent()) {
-				//Create a method stub for all <action> objects
-				if (o instanceof JAXBElement<?> && (((JAXBElement<?>)o).getName().toString().equals("{org.accapto}action") || ((JAXBElement<?>)o).getName().toString().equals("{org.accapto}transition"))){
-					@SuppressWarnings("rawtypes")
-					JAXBElement element = (JAXBElement) o;
+				
+				if (o instanceof JAXBElement<?>){
+					JAXBElement<?> element = (JAXBElement<?>) o;
+					
+					//Create a method stub for all <action> objects
 					if (((JAXBElement<?>)o).getName().toString().equals("{org.accapto}action")){
 						String function = ((ActionType) element.getValue()).getFunction();
 						temp += "\tpublic void " + function + "() {\n\t\t//TODO: auto-generated method stub\n\t}\n\n";
 						logger.log("     Adding method stub for method " + function + "()");
-					} else {
-						//transition
+					// Create intent for <transition> objects
+					} else if (((JAXBElement<?>)o).getName().toString().equals("{org.accapto}transition")){
 						String target = ((TransitionType) element.getValue()).getTarget();
-						temp += "\tpublic void goTo" + target + "(View view){\n\t\tIntent intent" + target + " = new Intent(this, " + target +"Activity.class);\n\t\tstartActivity(intent" + target + ");\n\t}";
-						addImports();
+						temp += "\tpublic void goTo" + target + "(View view){\n\t\tIntent intent" + target + " = new Intent(this, " + target +"Activity.class);\n\t\tstartActivity(intent" + target + ");\n\t}\n\n";
+						addImports(); //Add the needed imports for a transition
 						logger.log("     Adding intent for transition goTo" + target);
 					}
 				}

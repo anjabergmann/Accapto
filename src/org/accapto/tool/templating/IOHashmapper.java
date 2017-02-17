@@ -13,19 +13,21 @@ import org.accapto.model.OutputType;
 import org.accapto.model.TransitionType;
 
 /**
- * Creates the hashmap for input, output and action types. 
+ * Creates the hashmap for input, output, action and transition types. 
  * @author Anja
  *
  */
 public class IOHashmapper extends Hashmapper {
 
+	// Values that are needed for the template
 	private String name;
 	private String nameNoSpace;
 	private String description;
 	private String function;
 	private String transition;
-	private String type;
-	private JAXBElement<?> element;
+	
+	private JAXBElement<?> element; // Element from input xml file
+	private String type; // Type of the element (input, output, action, transition)
 
 
 	public IOHashmapper(JAXBElement<?> element, Logger logger){
@@ -50,6 +52,8 @@ public class IOHashmapper extends Hashmapper {
 
 	@Override
 	public void fillVars() {
+		// Not all values are needed for all element types but for convenience all types are treated the same 
+		//(having unneeded key-value-pairs in the hashmap will NOT cause exceptions)
 		vars.put("name", name);
 		vars.put("namenospace", nameNoSpace);
 		vars.put("description", description);
@@ -58,7 +62,53 @@ public class IOHashmapper extends Hashmapper {
 	}
 
 
+	/**
+	 * Returns a string with the complete layout of an <input>, <output>, or <action> element 
+	 * @return
+	 */
+	public String getLayout(){
+		OutputStream outputStream = new ByteArrayOutputStream();
+		PrintWriter writer = new PrintWriter(outputStream);
+		String template = "default.ftl"; // Define an empty default file in case non of the following if statements is fulfilled (which should not happen, but ...)
 
+		//Choose appropriate template file
+		if(type.equals("action")){
+			template = "layout_button.ftl";
+			logger.log("     Adding layout for button \"" + ((ActionType) element.getValue()).getFunction() + "\"");
+		} else if (type.equals("output")){
+			logger.log("     Adding layout for output element \"" + ((OutputType) element.getValue()).getName() + "\"");
+			template = "layout_output.ftl";
+		} else if (type.equals("input")){
+			logger.log("     Adding layout for input element \"" + ((InputType) element.getValue()).getName() + "\"");
+			template = "layout_input.ftl";
+		} else if (type.equals("transition")){
+			logger.log("     Adding layout for transition element \"" + (((TransitionType) element.getValue()).getName()) + "\"");
+			template = "layout_transition.ftl";
+		}
+
+		processTemplating(template, vars, writer);
+
+		return outputStream.toString();
+	}
+
+
+
+	/**
+	 * Determines of which type the element is (input, output, action, or transition)
+	 */
+	private void determineType(){
+		if((element.getName().toString().equals("{org.accapto}action"))){
+			type = "action";
+		} else if (element.getName().toString().equals("{org.accapto}output")){
+			type = "output";
+		} else if (element.getName().toString().equals("{org.accapto}input")){
+			type = "input";
+		} else if (element.getName().toString().equals("{org.accapto}transition")){
+			type = "transition";
+		}
+	}
+	
+	
 	private String getName(){
 		String temp = "";
 		if(type.equals("action")){
@@ -74,6 +124,7 @@ public class IOHashmapper extends Hashmapper {
 	}
 
 	private String getNameNoSpace(){
+		// Simply remove whitespaces from the name
 		return name.replaceAll("\\s","");
 	}
 
@@ -103,52 +154,5 @@ public class IOHashmapper extends Hashmapper {
 			return ((TransitionType)element.getValue()).getTarget();
 		}
 		return "";
-	}
-
-	/**
-	 * Returns a string with the layout of an <input>, <output>, or <action> element 
-	 * @return
-	 */
-	public String getLayout(){
-		OutputStream outputStream = new ByteArrayOutputStream();
-		PrintWriter writer = new PrintWriter(outputStream);
-		String template = "default.ftl";
-
-		//Choose appropriate template file
-		if(type.equals("action")){
-			template = "layout_button.ftl";
-			logger.log("     Adding layout for button \"" + ((ActionType) element.getValue()).getFunction() + "\"");
-		} else if (type.equals("output")){
-			logger.log("     Adding layout for output element \"" + ((OutputType) element.getValue()).getName() + "\"");
-			template = "layout_output.ftl";
-		} else if (type.equals("input")){
-			logger.log("     Adding layout for input element \"" + ((InputType) element.getValue()).getName() + "\"");
-			template = "layout_input.ftl";
-		} else if (type.equals("transition")){
-			logger.log("     Adding layout for transition element \"" + (((TransitionType) element.getValue()).getName()) + "\"");
-			template = "layout_transition.ftl";
-		}
-
-		processTemplating(template, vars, writer);
-
-		return outputStream.toString();
-	}
-
-
-
-
-	/**
-	 * Determine of which type the element is (input, output, action, or transition)
-	 */
-	private void determineType(){
-		if((element.getName().toString().equals("{org.accapto}action"))){
-			type = "action";
-		} else if (element.getName().toString().equals("{org.accapto}output")){
-			type = "output";
-		} else if (element.getName().toString().equals("{org.accapto}input")){
-			type = "input";
-		} else if (element.getName().toString().equals("{org.accapto}transition")){
-			type = "transition";
-		}
 	}
 }

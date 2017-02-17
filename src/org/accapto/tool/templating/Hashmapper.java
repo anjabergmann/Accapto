@@ -16,15 +16,15 @@ import freemarker.template.TemplateExceptionHandler;
 /**
  * Generates a hashmap for Freemarker template engine. 
  * The keys in the generated hashmap are the placeholders from a specific Freemarker template. 
- * The values are the Strins that will be put into the template instead of the placeholder. 
+ * The values are the Strings that will be put into the template instead of the placeholder. 
  * @author Anja
  *
  */
 public abstract class Hashmapper {
 
-	protected Map<String, Object> vars;
-	protected Logger logger;
-	protected Configuration cfg;
+	protected Map<String, Object> vars; //Hashmap with placeholders and values
+	protected Logger logger; // Logger object to write log messages to sys.out and to log file
+	protected Configuration cfg; //Freemarker configuration
 	
 	/**
 	 * Generates a standard configuration for Freemarker. 
@@ -34,6 +34,7 @@ public abstract class Hashmapper {
 		this.logger = logger;
 		this.vars = new HashMap<>();
 		
+		// Create a Freemarker configuration
 		cfg = new Configuration(Configuration.VERSION_2_3_23);
 		try {
 			cfg.setDirectoryForTemplateLoading(new File("templates"));

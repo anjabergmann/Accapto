@@ -6,13 +6,12 @@ import org.apache.commons.cli.*;
 
 public class InputParser {
 
-	private Logger logger;
-	private String[] args;
-	private File inputFile;
-	
-	private boolean verbose;
-	private String inputArg;
-	private String outputArg;
+	private String[] args;		// Input arguments from command line
+	private Logger logger;		// Logger object to write log messages to sys.out and to log file
+	private boolean verbose;	// Option verbose
+	private String inputArg;	// Path to respectively name of input file
+	private File inputFile;		// Input file 
+	private String outputArg;	// Path where the app scaffold will be created
 	
 	public InputParser(String[] args){
 		this.args = args;
@@ -22,23 +21,18 @@ public class InputParser {
 	
 
 	/**
-	 * Parses input file and params 
-	 * @return Returns true if input file of type .xml is found
-	 * 
+	 * Parses input file and params. Then uses checkInputFile() to check if input file exists.
 	 */
 	public void parseInput(){
-		
 		Options options = new Options();
 		createOptions(options);
 		parse(options);
-		
 		checkInputFile();
-		
 	}
 	
 	
 	/**
-	 * Checks if input file exists. Ends programme if it doesn't. 
+	 * Checks if input file exists. Ends programme, if it doesn't. 
 	 */
 	private void checkInputFile() {
 		inputFile = new File(inputArg);
@@ -100,13 +94,15 @@ public class InputParser {
 		}
 
 
+		// Get options from command line
 		inputArg = cmd.getOptionValue("input");
 		outputArg = cmd.getOptionValue("output");
 		verbose = cmd.hasOption("verbose");
+		
+		// Create a logger object to write log messages to log file and to sys.out
 		logger = new Logger(verbose);
-		
 
-		
+		//Set a default output path if no specific output path is given
 		if(outputArg == null){
 			outputArg = "..";
 		}

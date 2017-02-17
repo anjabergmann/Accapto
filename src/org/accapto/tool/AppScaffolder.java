@@ -10,25 +10,22 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Create Scaffold for android Gradle Project
- *
+ * @author Anja
  */
 public class AppScaffolder {
 
-	private String appName;
-	private String packageName;
-	private AppType app;
-	private Logger logger;
-	private String appPath;
-	private String activityPath;
-	private String testPath;
+	private AppType app; // App model
+	private String packageName; // Package of the app
+	private Logger logger; // Logger object to write log messages into file and to sys.out
+	private String appPath; // Path where app will be created
+	private String activityPath; // Path to the activity files
+	private String testPath; // Path to the test files
 
 	public AppScaffolder(AppType app, Logger logger, String appPath){
 		this.app = app;
-		this.appName = app.getAppname();
 		this.packageName = app.getPackage();
 		this.logger = logger;
-		this.appPath = appPath + File.separator + appName;
-		
+		this.appPath = appPath + File.separator + app.getAppname();
 	}
 
 
@@ -37,18 +34,20 @@ public class AppScaffolder {
 	 */
 	public void generate() {
 
-		if (appName != null && packageName!= null) {
+		if (app.getAppname() != null && packageName!= null) {
 
 			logger.log("INFO Creating app scaffold ...");
 
-			copyAppFolder();
-			createPackageFolders();
-			logger.initLog(appPath);
+			copyAppFolder(); // Copy template app folder from Templates/DefaultApp to the given output path
+			createPackageFolders(); // Add folders for the packages in 
+			logger.initLog(appPath); // Create the log file at the app path
 
-			Templating templating = new Templating(app, logger, appPath, activityPath);
+			// Add files to the project structure (manifest, activities, layouts)
+			Templating templating = new Templating(app, logger, appPath, activityPath); 
 			templating.startTemplating();
 		}
-
+		
+		// Print some log messages
 		logger.log("--------------------------------------------------");
 		logger.onlyFile("INFO App scaffold created at " + appPath + ".");
 		//Also write it to sys.out if verbose is not set
@@ -57,12 +56,14 @@ public class AppScaffolder {
 	
 	
 	/**
-	 * Copys the template app folder
+	 * Copys the template app folder to the given app directory
 	 */
 	public void copyAppFolder(){
 		logger.onlyFile("     Setting up app folder at " + appPath + " ...");
-		File srcDir = new File("." + File.separator + "Templates" + File.separator + "DefaultApp");
-		File destDir = new File(appPath);
+		
+		File srcDir = new File("." + File.separator + "Templates" + File.separator + "DefaultApp"); //Template app folder
+		File destDir = new File(appPath); //Destination directory 
+		
 		try {
 			FileUtils.copyDirectory(srcDir, destDir);
 			logger.onlyFile("     Sucessfully set up app folder.");
@@ -103,23 +104,4 @@ public class AppScaffolder {
 	}
 	
 
-	
-	//----- Getters and setters --------------------------------------
-
-
-	public String getAppName() {
-		return appName;
-	}
-
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
-
-	public String getPackageName() {
-		return packageName;
-	}
-
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
 }

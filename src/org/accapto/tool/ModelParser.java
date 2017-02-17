@@ -23,13 +23,13 @@ import org.accapto.model.*;
  */
 public class ModelParser {
 
-	// the package where the Java Classes are located
+	// Location of model classes
 	private static final String SCHEMA = "org.accapto.model";
 
 	private File xmlFile;	// XML input file
 	private File xsdFile;	// XSD file for validating XML
 	private AppType app;	// Java Model Container
-	private Logger logger;
+	private Logger logger;	// Logger object for logging messages to log file and sys.out
 	
 	public ModelParser(File xmlFile, Logger logger){
 		this.xmlFile = xmlFile;
@@ -37,12 +37,16 @@ public class ModelParser {
 		this.logger = logger;
 	}
 
-	
+	/**
+	 * Reads input file and creates app model if input file is valid. Stops programme if input file is invalid.
+	 * @return Model of app
+	 */
 	public AppType parseDSL(){
 
 		logger.log( "INFO Reading DSL file " + xmlFile.getName() + " ("+ xmlFile.length() + " Bytes) ..." );
 		try {
 			
+			// Validate the input file against the xsd file
 			validateAgainstXSD(xmlFile, xsdFile);
 			
 			// Read Java Model Schema
@@ -55,20 +59,18 @@ public class ModelParser {
 			Object o = jaxbUnmarshaller.unmarshal(xmlFile);
 			logger.onlyFile("     " + o);
 
+			// Create app model
 			logger.onlyFile("INFO Creating model of app ...");
 			@SuppressWarnings("unchecked")
 			JAXBElement<AppType> root = (JAXBElement<AppType>) jaxbUnmarshaller.unmarshal(xmlFile);
 			app = root.getValue();
 			logger.onlyFile("     " + app);
-
-			// Write information of model to console
+			
+			// Print some log messages
 			logger.log("--------------------------------------------------");
 			logger.log("APP MODEL: ");
 			logger.log("     Name: " + app.getAppname());
 			logger.log("     Package: " + app.getPackage());
-			//logger.log("     Number of screens: " + app.getScreen().size());
-
-			// Write specified screens to console
 			if (app.getScreen().size()>0){
 				logger.log("     Screens: ");
 				ScreenType screen = app.getScreen().get(0);
@@ -78,6 +80,7 @@ public class ModelParser {
 				}
 				logger.log("--------------------------------------------------");
 			}
+
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +89,7 @@ public class ModelParser {
 
 	
 	/**
-	 * Checks if input file is valid. Stops Accapto if input file is invalid.
+	 * Checks if input file is valid. Stops programme if input file is invalid.
 	 * @param xmlFile
 	 * @param xsdFile
 	 * @return

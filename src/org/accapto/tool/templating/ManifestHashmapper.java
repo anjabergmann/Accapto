@@ -16,12 +16,13 @@ import org.accapto.model.ScreenType;
  */
 public class ManifestHashmapper extends Hashmapper{
 
+	// Values that are needed for the template
 	private String packageString;
 	private String activities;
 	private String permissions;
 
-	private AppType app;
-	private String intent;
+	private AppType app; // Model of app
+	private String intent; // Intent --> an intent-filter is added to the first screen defined in the input file
 
 	public ManifestHashmapper(AppType app, Logger logger){
 		super(logger);
@@ -49,7 +50,7 @@ public class ManifestHashmapper extends Hashmapper{
 	private String getActivities() {
 		OutputStream outputStream = new ByteArrayOutputStream();
 		PrintWriter writer = new PrintWriter(outputStream);
-		//Add intent to the first Screen
+		//Add intent-filter to the first Screen
 		intent = "\t\t\t<intent-filter>\n"
 				+ "\t\t\t\t<action android:name=\"android.intent.action.MAIN\" />\n"
 				+ "\t\t\t\t<category android:name=\"android.intent.category.LAUNCHER\" />\n"
