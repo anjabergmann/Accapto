@@ -1,43 +1,56 @@
 package org.accapto.tool.templating;
 
-import java.util.List;
+import javax.xml.bind.JAXBElement;
 
 import org.accapto.helper.Logger;
-import org.accapto.model.AppType;
 import org.accapto.model.ScreenType;
 
 /**
- * 
+ * Creates the hashmap for a layout file. 
  * @author Anja
  *
  */
 public class LayoutHashmapper extends Hashmapper {
-	
+
 	private String layout;
-	
-	public LayoutHashmapper(AppType app, ScreenType screen, List<String> functions,Logger logger, MethodGenerator methodGenerator){
-		super(app, screen, functions, logger, methodGenerator);
+	private ScreenType screen;
+
+	public LayoutHashmapper(ScreenType screen, Logger logger){
+		super(logger);
+		this.screen = screen;
+		generateValues();
+		fillVars();
 	}
 
-	
+
+
 	@Override
 	public void generateValues(){
-		layout = getAdditionalLayout();
+		layout = getLayout();
 	}
 
 	@Override
 	public void fillVars(){
 		vars.put("layout", layout);
 	}
-	
-	private String getAdditionalLayout() {
+
+	private String getLayout() {
 		String temp = "";
 
-		for(String function : functions){
-			temp += methodGenerator.lookForMethod(function, "layout");
+		if(!screen.getContent().isEmpty()) {
+			//Loop through screen objects
+			for(Object o: screen.getContent()) {
+				if (o instanceof JAXBElement<?>){
+					//Generate layout for <input>, <output>, and <action> objects
+					@SuppressWarnings("rawtypes")
+					JAXBElement element = (JAXBElement) o;
+					IOHashmapper iohashmapper = new IOHashmapper(element, logger);
+					temp += iohashmapper.getLayout();
+				}
+			}
 		}
-		
+
 		return temp;
 	}
-	
+
 }

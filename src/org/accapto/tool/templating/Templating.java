@@ -86,7 +86,7 @@ public class Templating {
 			logger.log("INFO Creating Files for screen: " + screen.getName() + " ...");
 
 			activity = new ActivityHashmapper(app.getPackage(), screen, logger);
-			layout = new LayoutHashmapper(app, screen, functions, logger, methodGenerator);
+			layout = new LayoutHashmapper(screen, logger);
 
 			createFileOutputStream(screen, ACTIVITY);
 			processTemplating("activity.ftl", activity.getVars(), output);

@@ -85,21 +85,21 @@ public class IOHashmapper extends Hashmapper {
 	
 	
 	/**
-	 * Returns content of template file with the placeholders already filled in. 
+	 * Returns a string with the layout of an <input>, <output>, or <action> element 
 	 * @return
 	 */
-	public String getOutput(){
+	public String getLayout(){
 		OutputStream outputStream = new ByteArrayOutputStream();
 		PrintWriter writer = new PrintWriter(outputStream);
-		String template = "";
+		String template = "default.ftl";
 		
 		//Choose appropriate template file
 		if((element.getName().toString().equals("{org.accapto}action"))){
-			template = "";
+			template = "layout_button.ftl";
 		} else if (element.getName().toString().equals("{org.accapto}output")){
-			template = "";
+			template = "layout_output.ftl";
 		} else if (element.getName().toString().equals("{org.accapto}input")){
-			template = "";
+			template = "layout_input.ftl";
 		}
 		
 		processTemplating(template, vars, writer);

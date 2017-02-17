@@ -5,5 +5,5 @@
 	<EditText
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/txt${name_nospace}"
+		android:id="@+id/txt${namenospace}"
 		android:contentDescription="${description}"	/>

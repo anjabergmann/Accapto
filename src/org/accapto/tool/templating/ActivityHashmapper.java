@@ -1,19 +1,9 @@
 package org.accapto.tool.templating;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.xml.bind.JAXBElement;
 
 import org.accapto.helper.Logger;
 import org.accapto.model.ActionType;
-import org.accapto.model.AppType;
-import org.accapto.model.InputType;
-import org.accapto.model.OutputType;
 import org.accapto.model.ScreenType;
 
 /**
@@ -108,7 +98,5 @@ public class ActivityHashmapper extends Hashmapper {
 		
 		return temp;
 	}
-	
-
 	
 }
