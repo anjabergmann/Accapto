@@ -1,2 +1,0 @@
-private TextView showPosition;
-private LocationManager locationManager;

@@ -7,7 +7,6 @@ import org.apache.commons.cli.*;
 public class InputParser {
 
 	private Logger logger;
-	private FunctionDisplay functionDisplay;
 	private String[] args;
 	private File inputFile;
 	
@@ -74,9 +73,6 @@ public class InputParser {
 
 		Option output = new Option("o", "output", true, "path where the app will be created (default: accapto directory)");
 		options.addOption(output);
-		
-		Option functions = new Option("s", "showfunctions", false, "show pre-implemented functions");
-		options.addOption(functions);
 	}
 	
 	
@@ -95,12 +91,7 @@ public class InputParser {
 				formatter.printHelp("accapto", options);
 				System.exit(1);
 				return;
-			} else if (cmd.hasOption("showfunctions")){
-				functionDisplay = new FunctionDisplay();
-				functionDisplay.listMethods();
-				System.exit(1);
-				return;
-			}
+			} 
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("accapto", options);

@@ -12,10 +12,6 @@ For further information see https://docs.google.com/document/d/1x4WpHnGgAiqRyvwy
 
 ## TODO:
 > Validierung des Input-Files
-> Freemarker nested templating --> Templates in Templates 
-> Functions herausnehmen
-> Hashmapper --> sinnvolle(r) Konstruktor(en)
-> Hashmapper-Subklassen überarbeiten
 > Doku
 > Configuration file for build.gradle?
 > Include accessibility library

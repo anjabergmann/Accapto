@@ -7,11 +7,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import javax.xml.bind.JAXBElement;
+import java.util.Map;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -32,12 +29,10 @@ public class Templating {
 	private Configuration cfg; // Freemarker configuration
 	private AppType app;
 	private PrintWriter output;
-	private List<String> functions;
 	private Logger logger;
 	private Path appdir;
 	private Path activitydir;
 	private Path manifestdir;
-	private MethodGenerator methodGenerator;
 	private ActivityHashmapper activity;
 	private LayoutHashmapper layout;
 	private ManifestHashmapper manifest;
@@ -53,8 +48,6 @@ public class Templating {
 		this.appdir = FileSystems.getDefault().getPath(appPath);
 		this.activitydir = FileSystems.getDefault().getPath(activityPath);
 		this.manifestdir = FileSystems.getDefault().getPath(appPath, "app" + File.separator + "src" + File.separator + "main");
-		this.functions = new ArrayList<>();
-		this.methodGenerator = new MethodGenerator(logger);
 
 		// Configuration of the template engine
 		cfg = new Configuration(Configuration.VERSION_2_3_23);
@@ -95,42 +88,7 @@ public class Templating {
 		}
 	}
 
-	/**
-	 * Save all functions of a screen into an ArrayList. 
-	 * SOLLTE JETZT UNNÖTIG SEIN - LÖSCHEN WENN VERIFIZIERT
-	 * @param screen
-	 */
-	@SuppressWarnings("rawtypes")
-	private void readFunctions(ScreenType screen){
-		functions = new ArrayList<>();
 
-		if(!screen.getContent().isEmpty()) {
-			for(Object o: screen.getContent()) {
-				if (o instanceof JAXBElement<?>){
-
-					
-					JAXBElement element = (JAXBElement) o;
-					
-					//DEBUGGING DELETE LATER
-					Hashmapper hashmapper = new IOHashmapper(element, logger);
-					
-					
-					String type = element.getName().toString();
-					if (element.getName().toString().equals("{org.accapto}action")){
-						String function = ((ActionType) element.getValue()).getFunction();
-						logger.log("     Adding function: " + function);
-						functions.add(function);
-					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}output")){
-						String name = ((OutputType) element.getValue()).getName();
-						logger.log("     Creating output field \"" + name + "\" ...");
-					} else if (((JAXBElement) o).getName().toString().equals("{org.accapto}input")){
-						String name = ((InputType) element.getValue()).getName();
-						logger.log("     Creating input field \"" + name + "\" ...");
-					}
-				}
-			}
-		}
-	}
 
 
 	/**

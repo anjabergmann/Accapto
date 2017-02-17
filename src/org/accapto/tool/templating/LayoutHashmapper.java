@@ -45,7 +45,7 @@ public class LayoutHashmapper extends Hashmapper {
 					@SuppressWarnings("rawtypes")
 					JAXBElement element = (JAXBElement) o;
 					IOHashmapper iohashmapper = new IOHashmapper(element, logger);
-					temp += iohashmapper.getLayout();
+					temp += iohashmapper.getLayout() + "\n\n";
 				}
 			}
 		}
