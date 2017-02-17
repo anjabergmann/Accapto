@@ -1,7 +1,6 @@
 package org.accapto.tool;
 
 import java.io.File;
-import java.io.InputStream;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -19,7 +18,7 @@ import org.accapto.model.*;
 /**
  * Creates a Java Model from a given XML File.
  * 
- * @author Elmar Krainz
+ * @author Elmar Krainz, Anja Bergmann
  *
  */
 public class ModelParser {
@@ -40,7 +39,6 @@ public class ModelParser {
 
 	
 	public AppType parseDSL(){
-
 
 		logger.log( "INFO Reading DSL file " + xmlFile.getName() + " ("+ xmlFile.length() + " Bytes) ..." );
 		try {
@@ -87,7 +85,12 @@ public class ModelParser {
 	}
 
 	
-	
+	/**
+	 * Checks if input file is valid. Stops Accapto if input file is invalid.
+	 * @param xmlFile
+	 * @param xsdFile
+	 * @return
+	 */
 	private boolean validateAgainstXSD(File xmlFile, File xsdFile){
 		try{
 			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -97,7 +100,7 @@ public class ModelParser {
 			logger.log("INFO Input file is valid.");
 			return true;
 		}catch(Exception ex){
-			logger.logErr("ERROR Input file not valid. Please check input file and try again.");
+			logger.logErr("ERROR Input file invalid. Please check input file and try again.");
 			System.exit(1);
 			return false;
 		}
