@@ -10,8 +10,5 @@ A command line tool can be called from a GUI or a server, and therefore Accapto 
 For further information see https://docs.google.com/document/d/1x4WpHnGgAiqRyvwyYTT50nSo85BiXMwRsi5zAbixmHY/edit?usp=sharing
 
 
-## TODO:
-> Validierung des Input-Files
-> Doku
-> Configuration file for build.gradle?
-> Include accessibility library
+## Further plans
+As the name of the project suggests, the plan is to include an accessibility library to make it easy for app developers to create accessible apps. 

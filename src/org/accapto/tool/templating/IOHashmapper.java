@@ -96,9 +96,12 @@ public class IOHashmapper extends Hashmapper {
 		//Choose appropriate template file
 		if((element.getName().toString().equals("{org.accapto}action"))){
 			template = "layout_button.ftl";
+			logger.log("     Adding layout for button \"" + ((ActionType) element.getValue()).getFunction() + "\"");
 		} else if (element.getName().toString().equals("{org.accapto}output")){
+			logger.log("     Adding layout for output element \"" + ((OutputType) element.getValue()).getName() + "\"");
 			template = "layout_output.ftl";
 		} else if (element.getName().toString().equals("{org.accapto}input")){
+			logger.log("     Adding layout for input element \"" + ((InputType) element.getValue()).getName() + "\"");
 			template = "layout_input.ftl";
 		}
 		

@@ -92,6 +92,7 @@ public class ActivityHashmapper extends Hashmapper {
 					JAXBElement element = (JAXBElement) o;
 					String function = ((ActionType) element.getValue()).getFunction();
 					temp += "\tpublic void " + function + "() {\n\t\t//TODO: auto-generated method stub\n\t}\n\n";
+					logger.log("     Adding method stub for method " + function + "()");
 				}
 			}
 		}

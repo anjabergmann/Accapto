@@ -21,7 +21,7 @@ import org.accapto.model.*;
 /**
  * Creates domain-specific scaffold by a Java Model.
  * 
- * @author Martin Fruhmann, Elmar Krainz
+ * @author Martin Fruhmann, Elmar Krainz, Anja Bergmann
  *
  */
 public class Templating {
