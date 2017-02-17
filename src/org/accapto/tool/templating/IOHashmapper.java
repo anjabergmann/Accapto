@@ -1,5 +1,9 @@
 package org.accapto.tool.templating;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
 import javax.xml.bind.JAXBElement;
 
 import org.accapto.helper.Logger;
@@ -7,6 +11,11 @@ import org.accapto.model.ActionType;
 import org.accapto.model.InputType;
 import org.accapto.model.OutputType;
 
+/**
+ * Creates the hashmap for input, output and action types. 
+ * @author Anja
+ *
+ */
 public class IOHashmapper extends Hashmapper {
 
 	private String name;
@@ -38,8 +47,8 @@ public class IOHashmapper extends Hashmapper {
 		vars.put("namenospace", nameNoSpace);
 		vars.put("description", description);
 		vars.put("function", function);
-		
 	}
+	
 	
 	private String getName(){
 		if((element.getName().toString().equals("{org.accapto}action"))){
@@ -72,6 +81,30 @@ public class IOHashmapper extends Hashmapper {
 			return ((ActionType)element.getValue()).getFunction();
 		} 
 		return "";
+	}
+	
+	
+	/**
+	 * Returns content of template file with the placeholders already filled in. 
+	 * @return
+	 */
+	public String getOutput(){
+		OutputStream outputStream = new ByteArrayOutputStream();
+		PrintWriter writer = new PrintWriter(outputStream);
+		String template = "";
+		
+		//Choose appropriate template file
+		if((element.getName().toString().equals("{org.accapto}action"))){
+			template = "";
+		} else if (element.getName().toString().equals("{org.accapto}output")){
+			template = "";
+		} else if (element.getName().toString().equals("{org.accapto}input")){
+			template = "";
+		}
+		
+		processTemplating(template, vars, writer);
+		
+		return outputStream.toString();
 	}
 
 }

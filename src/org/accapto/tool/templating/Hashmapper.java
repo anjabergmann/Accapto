@@ -16,6 +16,13 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
+/**
+ * Generates a hashmap for Freemarker template engine. 
+ * The keys in the generated hashmap are the placeholders from a specific Freemarker template. 
+ * The values are the Strins that will be put into the template instead of the placeholder. 
+ * @author Anja
+ *
+ */
 public abstract class Hashmapper {
 
 	protected Map<String, Object> vars;
@@ -26,6 +33,10 @@ public abstract class Hashmapper {
 	protected MethodGenerator methodGenerator;
 	protected List<String> functions;
 	
+	/**
+	 * Generates a standard configuration for Freemarker. 
+	 * @param logger
+	 */
 	public Hashmapper(Logger logger){
 		this.logger = logger;
 		this.vars = new HashMap<>();
@@ -40,6 +51,7 @@ public abstract class Hashmapper {
 		}
 	}
 	
+	//TODO: Überarbeiten
 	public Hashmapper(AppType app, ScreenType screen, List<String> functions, Logger logger, MethodGenerator methodGenerator){
 		this.screen = screen;
 		this.app = app;
@@ -61,8 +73,19 @@ public abstract class Hashmapper {
 		fillVars();
 	}
 	
+	
+	
+	/**
+	 * Generates the values that will be put into the Freemarker template.
+	 */
 	public abstract void generateValues();
+	
+	/**
+	 * Fills the hashmap with the appropriate keys for a Freemarker template and the generated values. 
+	 */
 	public abstract void fillVars();
+	
+	
 	
 	/**
 	 * Starts freemarker templating engine for specified template & templating model.
@@ -82,6 +105,10 @@ public abstract class Hashmapper {
 			e.printStackTrace();
 		}
 	}	
+	
+	
+	
+	// --- Getter and setter -------------------------------------------------
 	
 	public Map<String, Object> getVars() {
 		return vars;

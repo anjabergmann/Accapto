@@ -75,16 +75,17 @@ public class Templating {
 	 */
 	public void startTemplating(){
 
-		manifest = new ManifestHashmapper(app, functions, logger, methodGenerator);
+		//Creates AndroidManifest.xml
+		manifest = new ManifestHashmapper(app, logger);
 		createFileOutputStream(null, MANIFEST);
 		processTemplating("manifest.ftl", manifest.getVars(), output);
 
+		//Loops through all screens
 		for(ScreenType screen: app.getScreen()) {
 			logger.log("--------------------------------------------------");
 			logger.log("INFO Creating Files for screen: " + screen.getName() + " ...");
 
-			readFunctions(screen);
-			activity = new ActivityHashmapper(app, screen, functions, logger, methodGenerator);
+			activity = new ActivityHashmapper(app.getPackage(), screen, logger);
 			layout = new LayoutHashmapper(app, screen, functions, logger, methodGenerator);
 
 			createFileOutputStream(screen, ACTIVITY);

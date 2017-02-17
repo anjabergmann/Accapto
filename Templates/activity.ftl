@@ -14,7 +14,6 @@ ${variables}
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_${layout});
-${onCreate}
 	}
 
 ${methods}
