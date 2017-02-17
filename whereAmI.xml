@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:app appname="WhereAmI-App" package="org.accapto.app.whereami"
+	xmlns:p="org.accapto" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.accapto accapto_model.xsd ">
+	<p:profile>no restrictions</p:profile>
+	
+		<p:screen description="" name="Start">
+		<p:output description="" name="Start: Wo bin ich" type="text" />
+		<p:transition description="open main" name=" zur Main" target="Main" />
+		<p:transition description="open main" name=" zu Julian" target="Juli" />
+		<p:transition description="open main" name="A11y Settings " target="A12ySettingsActivity" />
+	</p:screen>
+	
+	<p:screen name="Main">
+			<p:output description="zeige meine position" name="Meine Position" type="text" />
+			<p:action function="getPosition" name="Position bestimmen" description=""/>
+			<p:output name="position" description="" />
+	</p:screen>
+	
+	<p:screen name="Juli">
+		<p:output description="" name="Hallo Julian" type="text" />
+		<p:input name="Ziel" description="geben Sie das Ziel ein" />		
+	</p:screen>
+	
+
+	
+</p:app>
