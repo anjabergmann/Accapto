@@ -4,6 +4,13 @@
 	xsi:schemaLocation="org.accapto accapto_model.xsd ">
 	<p:profile>no restrictions</p:profile>
 	
+		<p:screen description="" name="Start">
+		<p:output description="" name="Start: Wo bin ich" type="text" />
+		<p:transition description="open main" name=" zur Main" target="Main" />
+		<p:transition description="open main" name=" zu Julian" target="Juli" />
+		<p:transition description="open main" name="A11y Settings " target="A12ySettingsActivity" />
+	</p:screen>
+	
 	<p:screen name="Main">
 			<p:output description="zeige meine position" name="Meine Position" type="text" />
 			<p:action function="getPosition" name="Position bestimmen" description=""/>
@@ -15,11 +22,6 @@
 		<p:input name="Ziel" description="geben Sie das Ziel ein" />		
 	</p:screen>
 	
-	<p:screen description="" name="Start">
-		<p:output description="" name="Start: Wo bin ich" type="text" />
-		<p:transition description="open main" name=" zur Main" target="Main" />
-		<p:transition description="open main" name=" zu Julian" target="Juli" />
-		<p:transition description="open main" name="A11y Settings " target="A12ySettingsActivity" />
-	</p:screen>
+
 	
 </p:app>

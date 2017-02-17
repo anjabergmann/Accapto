@@ -1,14 +1,14 @@
-package org.accapto.tool;
+package org.accapto;
 
 import java.io.File;
 
 import org.accapto.helper.InputParser;
 import org.accapto.helper.Logger;
+import org.accapto.tool.AppScaffolder;
+import org.accapto.tool.ModelParser;
 
-public class Accapto {
+public class AccaptoMain {
 
-	//TODO: Main-Klasse in org.accapto
-	
 	public static void main(String[] args) {
 
 		InputParser inputParser = new InputParser(args);
