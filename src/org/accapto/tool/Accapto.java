@@ -7,7 +7,7 @@ import org.accapto.helper.Logger;
 
 public class Accapto {
 
-	//TODO: 
+	//TODO: Main-Klasse in org.accapto
 	
 	public static void main(String[] args) {
 
