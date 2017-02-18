@@ -7,7 +7,7 @@ Accapto is a command line tool that creates a basic app structure from an xml in
 A command line tool can be called from a GUI or a server, and therefore Accapto can be included in further projects. 
 
 ## Doku
-For further information see https://docs.google.com/document/d/1x4WpHnGgAiqRyvwyYTT50nSo85BiXMwRsi5zAbixmHY/edit?usp=sharing
+For further information (e.g. how to get the project into Eclipse or write an input file) have a look at the Documentation-PDF file called 'AccaptoDocumentation-PA2_Bergmann_Kirchmaier'. 
 
 
 ## Further plans
